@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.article_title }}</title>
+    {% include 'public_style.html' %}
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="b_main container">
+    <div class="row">
+        <div class="col-md-8">
+            {{ article.article_content_html|safe }}
+        </div>
+        <div class="col-md-4">
+            {{ article.toc|safe }}
+        </div>
+    </div>
+</div>
+</body>
+</html>

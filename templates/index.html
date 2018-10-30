@@ -1,0 +1,68 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>测试</title>
+    {% include 'public_style.html' %}
+    <style>
+
+        body {
+            font-family: "PingFang SC", "Noto Sans CJK", "Source Han Sans", "Microsoft Yahei", source-han-sans-simplified-c, sans-serif;
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        }
+
+        h3 {
+            font-weight: 900;
+        }
+
+        .b_header-img {
+            width: 76px;
+            height: 76px;
+        }
+    </style>
+</head>
+<body>
+{% include "./nav.html" %}
+<div class="container b_main">
+    <div class="row">
+        <div class="col-md-8">
+            {% for article in article_list %}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="/article/{{ article.aid }}.html"><h3>{{ article.article_title }}</h3></a>
+                        <p class="text-muted">发布时间:{{ article.create_time }} |
+                            点击数:{{ article.article_info.article_click }}</p>
+                        <p class="text-uppercase">{{ article.article_describe }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {% load static %}
+                    <img class="img-circle b_header-img center-block" src="{% static 'logo.png' %}">
+                    <h3 class="text-center">
+                        刘浩然的博客
+                    </h3>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">友情链接</h3>
+                </div>
+                <div class="panel-body">
+                    {% for friend_link in friend_links %}
+                        <a href="{{ friend_link.url }}">{{ friend_link.value }}  <span style="color: #333;">|</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
