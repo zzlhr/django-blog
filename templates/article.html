@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <title>{{ article.article_title }}</title>
     {% include 'public_style.html' %}
+    <style>
+        article img{
+            max-width: 100%;
+        }
+    </style>
 </head>
 <body>
 {% include 'nav.html' %}
 <div class="b_main container">
     <div class="row">
-        <div class="col-md-8">
+        <article class="col-md-8">
+            <h1 class="text-center">{{ article.article_title }}</h1>
+            <p class="text-center" style="user-select: none;">作者:lhr | 发布时间:{{ article.create_time }} | 修改时间:{{ article.update_time }} | 点击数:{{ article.article_info.article_click }}</p>
+            <hr />
             {{ article.article_content_html|safe }}
-        </div>
+        </article>
         <div class="col-md-4">
             {{ article.toc|safe }}
         </div>
