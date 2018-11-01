@@ -15,12 +15,9 @@ def index(request):
             if article_info.aid == _article.aid:
                 _article.article_info = article_info
 
-    friend_links = list(FriendLink.objects.filter(status=0).order_by('id').all())
-
     template = get_template('index.html')
     context = {
         'article_list': article_list,
-        'friend_links': friend_links,
     }
     return HttpResponse(template.render(context, request))
 

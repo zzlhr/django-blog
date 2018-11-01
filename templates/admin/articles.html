@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ website.name }}-文章列表</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "admin.css" %}">
+    {% include "public_style.html" %}
+    <style>
+        .b_admin_main {
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+
+        .b_a_l_container {
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .b_a_r_main {
+            flex: 3;
+        }
+    </style>
+</head>
+<body>
+{% include "admin/admin_nav.html" %}
+
+<div class="b_admin_main">
+    {% include "admin/left_container.html" %}
+    <div class="clearfix b_a_r_main">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>文章列表</h3>
+                <hr>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">文章标题</th>
+                        <th scope="col">作者</th>
+                        <th scope="col">状态</th>
+                        <th scope="col">点击数</th>
+                        <th scope="col">评论数</th>
+                        <th scope="col">点赞数</th>
+                        <th scope="col">创建时间</th>
+                        <th scope="col">更新时间</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for article in articles %}
+                        <tr>
+                            <th scope="row">{{ article.aid }}</th>
+                            <td>{{ article.article_title }}</td>
+                            <td>{{ article.article_author }}</td>
+                            <td>{{ article.article_status }}</td>
+                            <td>{{ article.article_info.article_click }}</td>
+                            <td>{{ article.article_info.article_comment }}</td>
+                            <td>{{ article.article_info.article_zan }}</td>
+                            <td>{{ article.create_time }}</td>
+                            <td>{{ article.update_time }}</td>
+                            <td>
+                                <button class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> 编辑</button>
+                                <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 删除</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

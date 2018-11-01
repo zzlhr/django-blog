@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{ website.name }}-后台管理系统</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "admin.css" %}">
+    {% include "public_style.html" %}
 </head>
 <body>
+{% include "admin/admin_nav.html" %}
 
+<div class="b_admin_main row">
+    {% include "admin/left_container.html" %}
+    <div class="b_a_r_main col-10">
+        <!-- write you code -->
+    </div>
+</div>
 </body>
 </html>

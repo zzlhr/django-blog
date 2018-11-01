@@ -23,6 +23,6 @@ urlpatterns = [
     path("article/<int:aid>.html", home.read_article),
     path("api/index", api.index),
     path("admin/login.html", admin.login_page),
-    path("admin/login", admin.login)
-
+    path("admin/index.html", admin.index_page),
+    path("admin/articles.html", admin.articles_page),
 ]
