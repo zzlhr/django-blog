@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ website.name }}-写文章</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "admin.css" %}">
+    {% include "public_style.html" %}
+    <style>
+        #article_describe {
+            height: 100px;
+        }
+
+        .b_write_form {
+        }
+
+        #article_content {
+            width: 100%;
+        }
+
+        .b_write_panel {
+            border: none;
+        }
+
+        .bl_write_content {
+            padding: 0 !important;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+{% include "admin/admin_nav.html" %}
+<div class="b_admin_main row">
+    {% include "admin/left_container.html" %}
+    <div class="b_a_r_main col-10">
+        <div class="b_write_panel panel panel-default">
+            <div class="panel-body">
+                <form class="b_write_form" action="write.html" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="article_title">文章标题</label>
+                        <input type="text" class="form-control" name="article_title" id="article_title"
+                               placeholder="请输入标题">
+                    </div>
+                    <div class="form-group">
+                        <label for="article_describe">文章描述</label>
+                        <textarea class="form-control" name="article_describe" id="article_describe"
+                                  placeholder="请输入文章描述"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tag_content">文章标签</label>
+                        <input type="text" class="form-control" name="tag_content" id="tag_content"
+                               placeholder="请输入文章标签">
+                        <p class="help-block">标签与标签之间用","分开.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="article_content">文章内容</label>
+                        <div class="row" style="min-height: 200px">
+                            <div class="bl_write_content col-md-12">
+                                <textarea name="article_content" class="form-control" id="article_content"
+                                          oninput="this.editor.update()"
+                                          rows="6" cols="60">>Please write as much as you like.</textarea>
+                            </div>
+                            <div class="bl_write_content col-md-12" id="preview"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info">发布</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/markdown@0.5.0/lib/markdown.js"
+        integrity="sha256-QBx+/QhNUF90hZ/D7x43XVFf6XAXGfQej5ooYMYT3Ms=" crossorigin="anonymous"></script>
+<script>
+    function Editor(input, preview) {
+        this.update = function () {
+            preview.innerHTML = markdown.toHTML(input.value);
+        };
+        input.editor = this;
+        this.update();
+    }
+
+    var $ = function (id) {
+        return document.getElementById(id);
+    };
+    new Editor($("article_content"), $("preview"));
+</script>
+</html>

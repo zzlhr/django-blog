@@ -12,8 +12,7 @@ class Article(models.Model):
     aid = models.AutoField(primary_key=True)
     article_title = models.CharField(max_length=300)
     article_describe = models.CharField(max_length=255)
-    article_content_html = models.TextField()
-    article_content_md = models.TextField(blank=True, null=True)
+    article_content_md = models.TextField()
     article_author = models.PositiveIntegerField()
     article_status = models.IntegerField(blank=True, null=True)
     create_time = models.DateTimeField(blank=True, null=True)
@@ -155,4 +154,3 @@ class Website(models.Model):
     class Meta:
         managed = False
         db_table = 'website'
-

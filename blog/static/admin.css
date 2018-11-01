@@ -26,6 +26,7 @@ html, body {
     border-right: 1px solid #eceeef;
     background-color: #fff;
     float: left;
+    overflow: hidden;
 }
 
 .b_a_l_container .nav-link {
@@ -34,7 +35,10 @@ html, body {
 
 .b_a_r_main {
     width: 100%;
-    padding-left: 200px;
+    margin-left: 200px;
+    padding-right: 200px;
     height: 100%;
     background-color: #fff;
+    overflow:scroll;
+    position: absolute;
 }

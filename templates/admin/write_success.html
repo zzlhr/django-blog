@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "admin.css" %}">
+    {% include "public_style.html" %}
+    <style>
+        .b_msg_panel{
+            margin: 100px auto auto;
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+{% include "admin/admin_nav.html" %}
+
+<div class="b_admin_main row">
+    {% include "admin/left_container.html" %}
+    <div class="b_a_r_main col-10">
+        <div class="b_msg_panel panel panel-default">
+            <div class="panel-body">
+                <h1>{{ msg.title }}</h1>
+                <p>{{ msg.info }}</p>
+                {% for link in msg.links %}
+                    <a href="{{ link.href }}">{{ link.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
