@@ -6,9 +6,9 @@ from blog.models import Article, ArticleInfo, FriendLink
 
 
 def index(request):
-    article_list = list(Article.objects.all().order_by('-create_time')[:10])
+    article_list = list(Article.objects.filter(article_status=0).order_by('-create_time')[:10])
 
-    article_info_list = list(ArticleInfo.objects.filter(aid__in=(map(lambda a: a.aid, article_list))).all())
+    article_info_list = list(ArticleInfo.objects.filter(aid__in=(map(lambda a: a.aid, article_list))))
 
     for _article in article_list:
         for article_info in article_info_list:

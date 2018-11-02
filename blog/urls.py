@@ -26,5 +26,6 @@ urlpatterns = [
     path("admin/index.html", admin.index_page),
     path("admin/articles.html", admin.articles_page),
     path("admin/write.html", admin.wrtie_page),
+    path("admin/delete_article.html", admin.delete_article)
 
 ]

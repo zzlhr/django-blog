@@ -62,8 +62,9 @@
                             <td>
                                 <button class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> 编辑
                                 </button>
-                                <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 删除
-                                </button>
+                                <a href="/admin/delete_article.html?aid={{ article.aid }}" class="btn btn-danger"><span
+                                        class="glyphicon glyphicon-trash"></span> 删除
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}
