@@ -46,7 +46,7 @@
 
 
 
-**_欢迎补充_**
+**_欢迎补充_**  :point_right:[点我反馈](https://github.com/zzlhr/django-blog/issues/1)
 
 
 
