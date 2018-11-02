@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.http import HttpResponse
 from django.template.loader import get_template
 import markdown
@@ -9,12 +10,20 @@ from blog.views.admin import get_website_config
 
 def index(request):
     limit = 10
-    article_list = Article.objects.filter(article_status=0).order_by('-create_time')
+    search_keyword = request.GET.get("k", "")
+    if len(search_keyword.strip(" ")) > 0:
+        # search get
+        article_list = Article.objects \
+            .filter(Q(article_status=0) &
+                    (Q(article_title__icontains=search_keyword) |
+                     Q(article_describe__icontains=search_keyword))) \
+            .order_by('-create_time')
+    else:
+        article_list = Article.objects.filter(article_status=0).order_by('-create_time')
     paginator = Paginator(article_list, limit)  # 按每页10条分页
     page = request.GET.get('page', '1')  # 默认跳转到第一页
     result = paginator.page(page)
     article_info_list = ArticleInfo.objects.filter(aid__in=(map(lambda a: a.aid, result)))
-
     for _article in result:
         for article_info in article_info_list:
             if article_info.aid == _article.aid:
