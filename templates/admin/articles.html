@@ -71,7 +71,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                <nav aria-label="Page navigation">
+                <nav aria-label="Page navigation" style="text-align: center;">
                     <ul class="pagination">
                         {% if articles.has_previous %}
                             <li><a href="/admin/articles.html?page={{ articles.previous_page_number }}">上一页</a></li>
@@ -81,7 +81,7 @@
                         {% endif %}
 
                         {% for num in articles.paginator.page_range %}
-                            <li><a href="/admin/articles.html?page={{ num }}">{{ num }}</a></li>
+                            <li {% if articles.number == num %}class="active" {% endif %}><a href="/admin/articles.html?page={{ num }}">{{ num }}</a></li>
                         {% endfor %}
 
                         {% if articles.has_next %}

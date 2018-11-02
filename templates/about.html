@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ website.name }}</title>
+    <title>测试</title>
     {% include 'public_style.html' %}
     <style>
         h3 {
@@ -26,7 +26,7 @@
 <div class="container b_main">
     <div class="row">
         <div class="col-12">
-            {% for article in articles %}
+            {% for article in article_list %}
                 <div class="b_a_l_panel panel panel-default">
                     <div class="panel-body">
                         <a href="/article/{{ article.aid }}.html"><h3>{{ article.article_title }}</h3></a>
@@ -62,29 +62,6 @@
         {#            </div>#}
         {#        </div>#}
     </div>
-    <nav aria-label="Page navigation" style="text-align: center;">
-        <ul class="pagination ">
-            {% if articles.has_previous %}
-                <li><a href="/index.html?page={{ articles.previous_page_number }}">上一页</a></li>
-            {% else %}
-                <li class="disabled"><a href="/admin/articles.html?page=1">上一页</a>
-                </li>
-            {% endif %}
-
-            {% for num in articles.paginator.page_range %}
-                <li {% if articles.number == num %}class="active" {% endif %}><a href="/index.html?page={{ num }}">{{ num }}</a></li>
-            {% endfor %}
-
-            {% if articles.has_next %}
-                <li><a href="/index.html?page={{ articles.next_page_number }}">下一页</a>
-                </li>
-            {% else %}
-                <li class="disabled"><a href="/index.html?page=1">下一页</a>
-                </li>
-            {% endif %}
-            {#                        <li><a href="/admin/articles.html?page={{ articles.paginator.num_pages }}">尾页</a></li>#}
-        </ul>
-    </nav>
 </div>
 {% include "footer.html" %}
 </body>
