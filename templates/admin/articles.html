@@ -76,7 +76,7 @@
                         {% if articles.has_previous %}
                             <li><a href="/admin/articles.html?page={{ articles.previous_page_number }}">上一页</a></li>
                         {% else %}
-                            <li class="disabled"><a href="/admin/articles.html?page=1">上一页</a>
+                            <li class="disabled"><a>上一页</a>
                             </li>
                         {% endif %}
 
@@ -88,7 +88,7 @@
                             <li><a href="/admin/articles.html?page={{ articles.next_page_number }}">下一页</a>
                             </li>
                         {% else %}
-                            <li class="disabled"><a href="/admin/articles.html?page=1">下一页</a>
+                            <li class="disabled"><a>下一页</a>
                             </li>
                         {% endif %}
                         {#                        <li><a href="/admin/articles.html?page={{ articles.paginator.num_pages }}">尾页</a></li>#}

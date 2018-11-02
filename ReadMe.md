@@ -42,7 +42,7 @@
 - [ ] 数据备份
 - [ ] 数据迁移
 - [ ] 主流博客的数据导入
-
+- [ ] 图床集成
 
 
 **_欢迎补充_**  :point_right:[点我反馈](https://github.com/zzlhr/django-blog/issues/1)
