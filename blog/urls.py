@@ -16,11 +16,12 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 from blog.views import home, api, admin
-
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path("", home.index),
     path("index.html", home.index),
+    path("about.html", home.about),
+
     path("article/<int:aid>.html", home.read_article),
     path("api/index", api.index),
     path("admin/login.html", admin.login_page),
@@ -29,4 +30,6 @@ urlpatterns = [
     path("admin/write.html", admin.write_page),
     path("admin/delete_article.html", admin.delete_article)
 
+
 ]
+

@@ -55,3 +55,11 @@ def read_article(request, aid):
         'website': get_website_config(),
     }
     return HttpResponse(template.render(context, request))
+
+
+def about(request):
+    template = get_template('about.html')
+    context = {
+        'website': get_website_config(),
+    }
+    return HttpResponse(template.render(context, request))
