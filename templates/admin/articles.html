@@ -60,8 +60,9 @@
                             <td>{{ article.create_time }}</td>
                             <td>{{ article.update_time }}</td>
                             <td>
-                                <button class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> 编辑
-                                </button>
+                                <a href="/admin/write.html?aid={{ article.aid }}" class="btn btn-primary"><span
+                                        class="glyphicon glyphicon-edit"></span> 编辑
+                                </a>
                                 <a href="/admin/delete_article.html?aid={{ article.aid }}" class="btn btn-danger"><span
                                         class="glyphicon glyphicon-trash"></span> 删除
                                 </a>

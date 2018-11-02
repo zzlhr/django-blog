@@ -30,6 +30,7 @@ def get_website_config():
     return website
 
 
+# 登录
 def login_page(request):
     if request.method == "GET":
         template = get_template('admin/login.html')
@@ -56,6 +57,7 @@ def login_page(request):
         return resp
 
 
+# 后台首页
 def index_page(request):
     if request.method == "GET":
         template = get_template("admin/index.html")
@@ -65,6 +67,7 @@ def index_page(request):
         return HttpResponse(template.render(context, request))
 
 
+# 文章列表
 def articles_page(request):
     if request.method == "GET":
         limit = 10
@@ -92,16 +95,31 @@ def articles_page(request):
         return HttpResponse(template.render(context, request))
 
 
-def wrtie_page(request):
+# 写文章
+def write_page(request):
     if request.method == "GET":
-        template = get_template("admin/write.html")
+        aid = request.GET.get("aid", 0)
+        article = None
+        if aid != 0:
+            # 编辑
+            result = Article.objects.filter(aid=aid)
+            article = result[0]
+            _article_tag = list(ArticleTag.objects.filter(aid=aid))
+            article_tag_val = ""
+            for t in _article_tag:
+                article_tag_val += t.tag_content + ","
 
+            article.article_tag = article_tag_val[0:len(article_tag_val) - 1]
+
+        template = get_template("admin/write.html")
         context = {
             'website': get_website_config(),
+            'article': article
         }
         return HttpResponse(template.render(context, request))
 
     if request.method == "POST":
+
         article_title = request.POST.get("article_title")
         article_describe = request.POST.get("article_describe")
         article_content_md = request.POST.get("article_content")
@@ -112,11 +130,19 @@ def wrtie_page(request):
                           article_content_md=article_content_md, article_author=user.uid,
                           article_status=article_status, create_time=timezone.now(),
                           update_time=timezone.now())
+        if request.POST.get("aid") != "":
+            # 编辑
+            article.aid = request.POST.get("aid")
+
         article.save()
 
-        # 初始化文章点击数评论数点赞数
-        ArticleInfo(aid=article.aid, article_click=0, article_comment=0, article_zan=0).save()
+        if request.POST.get("aid") == "":
+            # 添加需要初始化文章点击数评论数点赞数
+            ArticleInfo(aid=article.aid, article_click=0, article_comment=0, article_zan=0).save()
 
+        if request.POST.get("aid") != "":
+            # 如果是编辑先删除之前的标签
+            ArticleTag.objects.filter(aid=request.POST.get("aid")).delete()
         # 添加标签
         tag = tags.split(",")
         for t in tag:
@@ -126,7 +152,7 @@ def wrtie_page(request):
         context = {
             'website': get_website_config(),
             'msg': {
-                'title': '添加文章成功！',
+                'title': request.POST.get("aid") != "" if "编辑文章成功！" else "添加文章成功!",
                 'info': '您下面可以返回列表进行查看，或者对本次添加文章进行修改',
                 'links': [
                     {

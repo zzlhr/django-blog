@@ -28,8 +28,12 @@ def read_article(request, aid):
     if _article is None:
         return HttpResponse(status=404)
 
-    print(_article)
-    _article.article_info = ArticleInfo.objects.filter(aid=aid).first()
+    article_info_result = ArticleInfo.objects.filter(aid=aid)
+
+    # article_info_result[0].article_click = article_info_result[0].article_click + 1
+    article_info_result.update(article_click=article_info_result[0].article_click + 1)
+
+    _article.article_info = article_info_result[0]
 
     md = markdown.Markdown(extensions=[
         'markdown.extensions.extra',
