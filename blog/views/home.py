@@ -10,6 +10,7 @@ from blog.views.admin import get_website_config
 
 def index(request):
     limit = 10
+    # 搜索功能
     search_keyword = request.GET.get("k", "")
     if len(search_keyword.strip(" ")) > 0:
         # search get
@@ -67,8 +68,16 @@ def read_article(request, aid):
 
 
 def about(request):
+    website = get_website_config()
+    md = markdown.Markdown(extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        'markdown.extensions.toc',
+    ])
+    about = md.convert(website.website_about)
     template = get_template('about.html')
     context = {
-        'website': get_website_config(),
+        'website': website,
+        'about': about,
     }
     return HttpResponse(template.render(context, request))

@@ -1,17 +1,22 @@
 <div class="b_a_l_container">
     <ul class="nav nav-pills flex-column">
-        <li class="nav-item{% if request.path == '/admin/index.html'%}
+        <li class="nav-item{% if request.path == '/admin/index.html' %}
         active
         {% endif %}">
             <a class="nav-link active" href="/admin/index.html"><span class="glyphicon glyphicon-home"></span> 首页</a>
         </li>
-        <li class="nav-item {% if request.path == '/admin/articles.html'%}
+        <li class="nav-item {% if request.path == '/admin/articles.html' %}
         active
         {% endif %}">
             <a class="nav-link" href="/admin/articles.html"><span class="glyphicon glyphicon-list"></span> 文章列表</a>
         </li>
-{#        <li class="nav-item">#}
-{#            <a class="nav-link disabled" href="#">Disabled</a>#}
-{#        </li>#}
+        <li class="nav-item {% if request.path == '/admin/about.html' %}
+        active
+        {% endif %}">
+            <a class="nav-link" href="/admin/about.html"><span class="glyphicon glyphicon-user"></span> 编辑关于</a>
+        </li>
+        {#        <li class="nav-item">#}
+        {#            <a class="nav-link disabled" href="#">Disabled</a>#}
+        {#        </li>#}
     </ul>
 </div>

@@ -206,3 +206,26 @@ def delete_article(request):
                 }
             }
             return HttpResponse(template.render(context, request))
+
+
+def about_page(request):
+    if request.method == "GET":
+        template = get_template("admin/about.html")
+
+        context = {
+            'website': get_website_config(),
+        }
+        return HttpResponse(template.render(context, request))
+    if request.method == "POST":
+        about = request.POST.get("website_about")
+        website = Website.objects.filter(id=1)[0]
+        print(website)
+        website.website_about = about
+        website.save()
+        template = get_template("admin/about.html")
+
+        context = {
+            'website': get_website_config(),
+            'msg': '保存成功！'
+        }
+        return HttpResponse(template.render(context, request))

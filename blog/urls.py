@@ -21,15 +21,14 @@ urlpatterns = [
     path("", home.index),
     path("index.html", home.index),
     path("about.html", home.about),
-
     path("article/<int:aid>.html", home.read_article),
     path("api/index", api.index),
     path("admin/login.html", admin.login_page),
     path("admin/index.html", admin.index_page),
     path("admin/articles.html", admin.articles_page),
     path("admin/write.html", admin.write_page),
-    path("admin/delete_article.html", admin.delete_article)
-
+    path("admin/delete_article.html", admin.delete_article),
+    path("admin/about.html", admin.about_page)
 
 ]
 

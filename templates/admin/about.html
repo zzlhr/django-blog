@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ website.name }}-关于</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "admin.css" %}">
+    {% include "public_style.html" %}
+</head>
+<body>
+{% include "admin/admin_nav.html" %}
+<div class="b_admin_main row">
+    {% include "admin/left_container.html" %}
+    <div class="b_a_r_main col-10">
+        <!-- write you code -->
+        <form action="about.html" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <h3>编辑关于</h3>
+                <p class="text-muted">
+                    <small>备注:请使用markdown语法</small>
+                </p>
+                <p>{% if msg != None %}{{ msg }}{% endif %}</p>
+                <div style="min-height: 200px">
+                    <div>
+                        <textarea name="website_about" class="form-control" id="website_about"
+                                  oninput="this.editor.update()"
+                                  rows="6" cols="60">{% if website != None %}{{ website.website_about }}{% endif %}</textarea>
+                    </div>
+                    <div class="bl_write_content" id="preview"></div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">保存</button>
+        </form>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/markdown@0.5.0/lib/markdown.js"
+        integrity="sha256-QBx+/QhNUF90hZ/D7x43XVFf6XAXGfQej5ooYMYT3Ms=" crossorigin="anonymous"></script>
+<script>
+    function Editor(input, preview) {
+        this.update = function () {
+            preview.innerHTML = markdown.toHTML(input.value);
+        };
+        input.editor = this;
+        this.update();
+    }
+
+    var $ = function (id) {
+        return document.getElementById(id);
+    };
+    new Editor($("website_about"), $("preview"));
+</script>
+</body>
+</html>

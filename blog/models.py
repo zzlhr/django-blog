@@ -150,7 +150,7 @@ class Website(models.Model):
     description = models.CharField(max_length=500, blank=True, null=True)
     master_name = models.CharField(max_length=50, blank=True, null=True)
     master_email = models.CharField(max_length=200, blank=True, null=True)
-
+    website_about = models.TextField(blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'website'
