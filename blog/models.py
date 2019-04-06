@@ -9,6 +9,8 @@ from django.db import models
 
 
 class Article(models.Model):
+    use_in_migrations = True
+
     aid = models.AutoField(primary_key=True)
     article_title = models.CharField(max_length=300)
     article_describe = models.CharField(max_length=255)
@@ -17,13 +19,19 @@ class Article(models.Model):
     article_status = models.IntegerField(blank=True, null=True)
     create_time = models.DateTimeField(blank=True, null=True)
     update_time = models.DateTimeField(blank=True, null=True)
+    article_click = models.IntegerField()
+    article_comment = models.IntegerField()
+    article_favour = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'article'
+        app_label = 'blog'
 
 
 class ArticleComment(models.Model):
+    use_in_migrations = True
+
     article_id = models.IntegerField()
     user_id = models.IntegerField()
     comment_content = models.CharField(max_length=1000, blank=True, null=True)
@@ -35,20 +43,21 @@ class ArticleComment(models.Model):
     class Meta:
         managed = False
         db_table = 'article_comment'
+        app_label = 'blog'
 
 
-class ArticleInfo(models.Model):
-    aid = models.PositiveIntegerField(primary_key=True)
-    article_click = models.IntegerField()
-    article_comment = models.IntegerField()
-    article_zan = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'article_info'
+# class ArticleInfo(models.Model):
+#     aid = models.PositiveIntegerField(primary_key=True)
+#
+#
+#     class Meta:
+#         managed = False
+#         db_table = 'article_info'
 
 
 class ArticlePlace(models.Model):
+    use_in_migrations = True
+
     place_tag = models.CharField(max_length=20)
     place_value = models.CharField(max_length=100)
     place_type = models.IntegerField(blank=True, null=True)
@@ -56,9 +65,12 @@ class ArticlePlace(models.Model):
     class Meta:
         managed = False
         db_table = 'article_place'
+        app_label = 'blog'
 
 
 class ArticleStatistics(models.Model):
+    use_in_migrations = True
+
     statistics_name = models.CharField(max_length=50)
     statistics_type = models.IntegerField()
     statistics_value = models.CharField(max_length=20)
@@ -68,9 +80,12 @@ class ArticleStatistics(models.Model):
     class Meta:
         managed = False
         db_table = 'article_statistics'
+        app_label = 'blog'
 
 
 class ArticleTag(models.Model):
+    use_in_migrations = True
+
     atid = models.AutoField(primary_key=True)
     aid = models.IntegerField()
     tag_content = models.CharField(max_length=255)
@@ -78,9 +93,12 @@ class ArticleTag(models.Model):
     class Meta:
         managed = False
         db_table = 'article_tag'
+        app_label = 'blog'
 
 
 class AuthCode(models.Model):
+    use_in_migrations = True
+
     ac_id = models.CharField(primary_key=True, max_length=32)
     ip = models.CharField(max_length=45)
     value = models.CharField(max_length=20)
@@ -90,9 +108,12 @@ class AuthCode(models.Model):
     class Meta:
         managed = False
         db_table = 'auth_code'
+        app_label = 'blog'
 
 
 class FriendLink(models.Model):
+    use_in_migrations = True
+
     value = models.CharField(max_length=20)
     url = models.CharField(max_length=255)
     status = models.IntegerField(blank=True, null=True)
@@ -100,9 +121,12 @@ class FriendLink(models.Model):
     class Meta:
         managed = False
         db_table = 'friend_link'
+        app_label = 'blog'
 
 
 class Log(models.Model):
+    use_in_migrations = True
+
     user_name = models.CharField(max_length=20, blank=True, null=True)
     user_id = models.IntegerField(blank=True, null=True)
     user_ip = models.CharField(max_length=20, blank=True, null=True)
@@ -112,18 +136,24 @@ class Log(models.Model):
     class Meta:
         managed = False
         db_table = 'log'
+        app_label = 'blog'
 
 
 class Tag(models.Model):
+    use_in_migrations = True
+
     tag_content = models.CharField(max_length=20)
     tag_time = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'tag'
+        app_label = 'blog'
 
 
 class User(models.Model):
+    use_in_migrations = True
+
     uid = models.AutoField(primary_key=True)
     login_name = models.CharField(max_length=20)
     username = models.CharField(max_length=20)
@@ -141,9 +171,12 @@ class User(models.Model):
     class Meta:
         managed = False
         db_table = 'user'
+        app_label = 'blog'
 
 
 class Website(models.Model):
+    use_in_migrations = True
+
     host = models.CharField(max_length=100)
     name = models.CharField(max_length=20)
     keywords = models.CharField(max_length=500, blank=True, null=True)
@@ -151,6 +184,8 @@ class Website(models.Model):
     master_name = models.CharField(max_length=50, blank=True, null=True)
     master_email = models.CharField(max_length=200, blank=True, null=True)
     website_about = models.TextField(blank=True, null=True)
+
     class Meta:
         managed = False
         db_table = 'website'
+        app_label = 'blog'

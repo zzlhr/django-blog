@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import get_template
 from django.utils import timezone
 
-from blog.models import Website, User, Article, ArticleInfo, ArticleTag
+from blog.models import Website, User, Article, ArticleTag
 from blog.util import md5
 import uuid
 
